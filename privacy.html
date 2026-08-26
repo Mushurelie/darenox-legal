@@ -1,218 +1,402 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Politique de confidentialité — Darenox</title>
+<title>Confidentialité — Darenox</title>
+<meta name="description" content="Quelles données Darenox collecte, pourquoi, avec qui elles sont partagées et comment les faire supprimer.">
+<meta name="color-scheme" content="dark light">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="_style.css">
+
+<script>
+  /* Appliqué avant le premier rendu : sans ça, la page s'affiche une fraction
+     de seconde dans le mauvais thème avant que le script principal ne charge. */
+  try {
+    var t = localStorage.getItem('darenox-legal-theme');
+    document.documentElement.setAttribute(
+      'data-theme',
+      t === 'light' || t === 'dark'
+        ? t
+        : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    );
+  } catch (e) {}
+</script>
 </head>
 <body>
-<main>
 
-<header>
-  <span class="brand">Darenox</span>
-  <h1>Politique de confidentialité</h1>
-  <p class="updated">Dernière mise à jour : 26 août 2026</p>
+<a class="skip" href="#doc">Aller au contenu</a>
+<div class="progress" aria-hidden="true"><div class="progress__bar"></div></div>
+
+<header class="head">
+  <div class="head__aurora" aria-hidden="true"></div>
+  <div class="head__inner">
+
+    <div class="bar">
+      <a class="brand" href="index.html">
+        <span class="brand__dot" aria-hidden="true"></span>
+        Darenox
+      </a>
+      <button class="theme-toggle" type="button" hidden>
+        <span data-theme-icon aria-hidden="true">☾</span>
+        <span data-theme-label>Sombre</span>
+      </button>
+    </div>
+
+    <div class="title-block">
+      <span class="eyebrow">Vos données</span>
+      <h1>Politique de confidentialité</h1>
+    </div>
+
+    <p class="lede">
+      Ce document dit exactement ce que Darenox collecte, pourquoi, à qui c'est
+      transmis et comment tout faire effacer. Il est écrit pour être lu, pas
+      pour être accepté sans être lu.
+    </p>
+
+    <div class="stamp">
+      <span>Mise à jour&nbsp;: <b>26 août 2026</b></span>
+      <span>Version de l'app&nbsp;: <b>2.0.2</b></span>
+      <span>Durée de lecture&nbsp;: <b>6 minutes</b></span>
+    </div>
+
+  </div>
 </header>
 
-<p>
-  Darenox est un jeu d'action ou vérité réservé aux adultes. Ce document décrit
-  exactement quelles données l'application collecte, pourquoi, avec qui elles
-  sont partagées, et comment les faire supprimer.
-</p>
+<div class="wrap">
 
-<div class="card warn">
-  <h3 style="margin-top:0">Contenu pour adultes</h3>
-  <p style="margin-bottom:0">
-    Darenox est interdit aux personnes de moins de 18 ans. Les parties jouées
-    peuvent porter sur la vie intime. Lorsque vous jouez en ligne, le texte des
-    cartes tirées et vos réponses écrites sont enregistrés sur nos serveurs pour
-    permettre à la partie de se dérouler entre plusieurs appareils. Ces données
-    relèvent de la <strong>vie sexuelle</strong> au sens de l'article 9 du RGPD :
-    elles ne sont traitées qu'avec votre consentement explicite, donné en créant
-    un compte et en lançant une partie en ligne, et retirable à tout moment en
-    supprimant votre compte.
-  </p>
+  <aside class="rail">
+    <details class="rail__box" open>
+      <summary>Sommaire</summary>
+      <p class="rail__label">Sommaire</p>
+      <ul class="rail__list">
+        <li><a href="#resume"><span class="rail__num">00</span> L'essentiel</a></li>
+        <li><a href="#adultes"><span class="rail__num">01</span> Contenu pour adultes</a></li>
+        <li><a href="#responsable"><span class="rail__num">02</span> Qui est responsable</a></li>
+        <li><a href="#donnees"><span class="rail__num">03</span> Données collectées</a></li>
+        <li><a href="#jamais"><span class="rail__num">04</span> Ce qu'on ne fait pas</a></li>
+        <li><a href="#partage"><span class="rail__num">05</span> Partage</a></li>
+        <li><a href="#duree"><span class="rail__num">06</span> Conservation</a></li>
+        <li><a href="#droits"><span class="rail__num">07</span> Vos droits</a></li>
+        <li><a href="#securite"><span class="rail__num">08</span> Sécurité</a></li>
+        <li><a href="#mineurs"><span class="rail__num">09</span> Mineurs</a></li>
+        <li><a href="#modifications"><span class="rail__num">10</span> Modifications</a></li>
+      </ul>
+    </details>
+  </aside>
+
+  <main class="doc" id="doc">
+
+    <section id="resume">
+      <h2><span class="num">00</span>L'essentiel</h2>
+      <p>
+        Si vous ne lisez qu'un paragraphe, lisez celui-ci. Darenox ne diffuse
+        aucune publicité et ne revend rien à personne. Les parties jouées sur un
+        seul téléphone ne quittent jamais l'appareil. Créer un compte permet de
+        jouer à distance&nbsp;: à partir de là, votre adresse e-mail, votre
+        profil et vos parties en ligne sont enregistrés sur nos serveurs, en
+        Europe. Vous pouvez tout effacer depuis l'application, en deux
+        tapotements, et l'effacement est immédiat.
+      </p>
+    </section>
+
+    <section id="adultes">
+      <h2><span class="num">01</span>Contenu pour adultes</h2>
+      <p>
+        Darenox est interdit aux personnes de moins de 18&nbsp;ans. Les parties
+        peuvent porter sur la vie intime.
+      </p>
+      <div class="note note--warn">
+        <p class="note__title">Une donnée sensible, et nous la traitons comme telle</p>
+        <p>
+          Quand vous jouez en ligne, le texte des cartes tirées et vos réponses
+          écrites sont enregistrés pour que la partie puisse se dérouler entre
+          plusieurs téléphones. Ces informations relèvent de la
+          <strong>vie sexuelle</strong> au sens de l'article&nbsp;9 du RGPD.
+        </p>
+        <p>
+          Elles ne sont donc traitées qu'avec votre <strong>consentement
+          explicite</strong>, donné en créant un compte puis en lançant une
+          partie en ligne. Ce consentement se retire à tout moment&nbsp;: il
+          suffit de supprimer votre compte, et ces données disparaissent avec
+          lui.
+        </p>
+      </div>
+    </section>
+
+    <section id="responsable">
+      <h2><span class="num">02</span>Qui est responsable</h2>
+      <p>
+        Darenox est édité par un développeur indépendant. C'est lui, et personne
+        d'autre, qui décide de ce qui est collecté et qui répond de ce document.
+      </p>
+      <p>
+        <a class="mailto" href="mailto:pro.mushurelie@gmail.com">
+          <span aria-hidden="true">✉</span> pro.mushurelie@gmail.com
+        </a>
+      </p>
+    </section>
+
+    <section id="donnees">
+      <h2><span class="num">03</span>Ce qui est collecté</h2>
+      <p>
+        Rien d'autre que ce qui suit. Chaque ligne indique la raison d'être de la
+        donnée et le fondement juridique qui autorise à la traiter.
+      </p>
+
+      <ul class="facts">
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Adresse e-mail et mot de passe</span>
+            <span class="pill">Contrat</span>
+          </div>
+          <p class="fact__why">
+            Créer votre compte et le protéger. Le mot de passe est stocké haché,
+            jamais en clair&nbsp;: personne ne peut le lire, nous compris.
+          </p>
+        </li>
+
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Profil</span>
+            <span class="pill">Contrat</span>
+          </div>
+          <p class="fact__why">
+            Prénom affiché, photo, genre, rang et badges. Sert à vous
+            reconnaître entre amis et à choisir les cartes qui vous
+            correspondent.
+          </p>
+        </li>
+
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Parties en ligne</span>
+            <span class="pill pill--consent">Consentement explicite</span>
+          </div>
+          <p class="fact__why">
+            Cartes tirées, réponses écrites, réactions et statistiques. Sans
+            elles, une partie répartie sur plusieurs téléphones ne peut pas
+            fonctionner.
+          </p>
+        </li>
+
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Relations</span>
+            <span class="pill">Contrat</span>
+          </div>
+          <p class="fact__why">
+            Amis, groupes, messages de groupe et lien de couple. C'est la partie
+            sociale du jeu.
+          </p>
+        </li>
+
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Achats</span>
+            <span class="pill">Contrat</span>
+          </div>
+          <p class="fact__why">
+            Ce que vous avez acheté, pour vous y donner accès sur tous vos
+            appareils. Vos coordonnées bancaires ne nous parviennent jamais.
+          </p>
+        </li>
+
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Notifications</span>
+            <span class="pill pill--consent">Consentement</span>
+          </div>
+          <p class="fact__why">
+            Un jeton propre à votre appareil, pour vous prévenir quand c'est
+            votre tour. Uniquement si vous acceptez les notifications.
+          </p>
+        </li>
+
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Rapports d'erreur</span>
+            <span class="pill">Intérêt légitime</span>
+          </div>
+          <p class="fact__why">
+            Modèle d'appareil, version de l'app, écran concerné et trace
+            technique, pour corriger les plantages. L'identifiant joint est
+            propre à Darenox et ne permet de vous suivre nulle part ailleurs.
+          </p>
+        </li>
+      </ul>
+
+      <h3 id="hors-ligne">Le mode hors ligne ne collecte rien</h3>
+      <p>
+        Les parties sur un seul téléphone — «&nbsp;en vrai&nbsp;», «&nbsp;la
+        roue&nbsp;» — ne demandent aucun compte.
+        <strong>Rien ne quitte votre appareil</strong>&nbsp;: prénoms,
+        statistiques et cartes personnelles restent chez vous.
+      </p>
+    </section>
+
+    <section id="jamais">
+      <h2><span class="num">04</span>Ce que Darenox ne fait pas</h2>
+      <div class="note note--do">
+        <p class="note__title">Jamais, dans aucune version</p>
+        <ul>
+          <li>Aucune publicité, donc aucun traceur publicitaire.</li>
+          <li>Aucune revente ni location de données.</li>
+          <li>Aucune collecte de votre position.</li>
+          <li>Aucun accès à vos contacts.</li>
+          <li>
+            Aucun accès à vos photos, à l'exception de celle que vous choisissez
+            vous-même comme photo de profil.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="partage">
+      <h2><span class="num">05</span>Avec qui c'est partagé</h2>
+      <p>Trois prestataires, et aucun autre.</p>
+      <ul class="facts">
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Supabase</span>
+            <span class="pill">Union européenne</span>
+          </div>
+          <p class="fact__why">
+            Héberge la base de données, l'authentification et les photos de
+            profil.
+          </p>
+        </li>
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Expo</span>
+            <span class="pill">États-Unis</span>
+          </div>
+          <p class="fact__why">
+            Distribue les mises à jour de l'application et achemine les
+            notifications.
+          </p>
+        </li>
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Google Play</span>
+            <span class="pill">États-Unis</span>
+          </div>
+          <p class="fact__why">
+            Traite les paiements. Vos coordonnées bancaires sont gérées par
+            Google et ne nous sont jamais transmises.
+          </p>
+        </li>
+      </ul>
+      <p>
+        Vos données peuvent également être communiquées si la loi nous y oblige.
+        Aucune autre situation ne le justifie.
+      </p>
+    </section>
+
+    <section id="duree">
+      <h2><span class="num">06</span>Combien de temps</h2>
+      <ul>
+        <li>
+          <strong>Compte et contenu</strong> — jusqu'à la suppression de votre
+          compte.
+        </li>
+        <li>
+          <strong>Compte inactif</strong> — supprimé après 24&nbsp;mois sans
+          connexion, avec un avertissement envoyé par e-mail avant.
+        </li>
+        <li><strong>Rapports d'erreur</strong> — 12&nbsp;mois.</li>
+        <li>
+          <strong>Preuves d'achat</strong> — conservées le temps qu'imposent les
+          obligations comptables, même après suppression du compte, sous une
+          forme qui ne permet plus de remonter jusqu'à vous.
+        </li>
+      </ul>
+    </section>
+
+    <section id="droits">
+      <h2><span class="num">07</span>Vos droits</h2>
+      <p>
+        Le RGPD vous donne le droit d'accéder à vos données, de les corriger, de
+        les effacer, d'en obtenir une copie, de vous opposer à leur traitement et
+        de retirer votre consentement quand vous voulez.
+      </p>
+      <p>
+        La plupart s'exercent directement dans l'application, depuis l'écran
+        <strong>Profil</strong>. Pour le reste, écrivez à
+        <a href="mailto:pro.mushurelie@gmail.com">pro.mushurelie@gmail.com</a>&nbsp;;
+        nous répondons sous 30&nbsp;jours.
+      </p>
+
+      <div class="note note--do">
+        <p class="note__title">Supprimer votre compte</p>
+        <p>
+          Dans l'application&nbsp;:
+          <strong>Profil → Supprimer mon compte</strong>. C'est immédiat et
+          définitif.
+        </p>
+        <p>
+          Sans accès à l'application, passez par la
+          <a href="delete-account.html">page de demande de suppression</a>.
+        </p>
+      </div>
+
+      <p>
+        Si notre réponse ne vous satisfait pas, vous pouvez saisir la
+        <a href="https://www.cnil.fr/fr/plaintes" rel="noopener">CNIL</a>.
+      </p>
+    </section>
+
+    <section id="securite">
+      <h2><span class="num">08</span>Sécurité</h2>
+      <p>
+        Les échanges avec nos serveurs sont chiffrés en transit. L'accès aux
+        données est cloisonné compte par compte
+        <strong>au niveau de la base elle-même</strong>&nbsp;: un compte ne peut
+        pas lire les données d'un autre, même si l'application était compromise.
+      </p>
+      <p>
+        Aucun système n'est infaillible. En cas de violation susceptible de
+        présenter un risque pour vos droits, vous serez informé sans délai.
+      </p>
+    </section>
+
+    <section id="mineurs">
+      <h2><span class="num">09</span>Mineurs</h2>
+      <p>
+        Darenox est <strong>strictement réservé aux personnes majeures</strong>.
+        Nous ne collectons pas sciemment de données concernant des mineurs. Si
+        vous constatez qu'un mineur a créé un compte, écrivez-nous&nbsp;: il sera
+        supprimé sans délai.
+      </p>
+    </section>
+
+    <section id="modifications">
+      <h2><span class="num">10</span>Modifications</h2>
+      <p>
+        Toute modification sera publiée sur cette page, avec sa date. Un
+        changement substantiel — une nouvelle donnée collectée, un nouveau
+        prestataire — vous sera signalé dans l'application avant d'entrer en
+        vigueur.
+      </p>
+    </section>
+
+  </main>
 </div>
 
-<h2>1. Qui est responsable</h2>
-<p>
-  Darenox est édité par un développeur indépendant, joignable à
-  <a href="mailto:pro.mushurelie@gmail.com">pro.mushurelie@gmail.com</a>.
-  C'est l'adresse à utiliser pour toute question ou demande relative à vos
-  données.
-</p>
-
-<h2>2. Les données collectées</h2>
-
-<table>
-  <thead>
-    <tr><th>Donnée</th><th>Pourquoi</th><th>Base légale</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Adresse e-mail</strong><br>et mot de passe</td>
-      <td>Créer et sécuriser votre compte. Le mot de passe est stocké sous forme
-          hachée : il n'est lisible par personne, pas même par nous.</td>
-      <td>Exécution du contrat</td>
-    </tr>
-    <tr>
-      <td><strong>Profil</strong> : prénom affiché, photo, genre, rang, badges</td>
-      <td>Vous identifier auprès de vos amis, et adapter les cartes qui vous sont
-          servies.</td>
-      <td>Exécution du contrat</td>
-    </tr>
-    <tr>
-      <td><strong>Parties en ligne</strong> : cartes tirées, réponses écrites,
-          réactions, statistiques</td>
-      <td>Faire fonctionner une partie répartie sur plusieurs téléphones et
-          afficher votre historique.</td>
-      <td>Consentement explicite</td>
-    </tr>
-    <tr>
-      <td><strong>Relations</strong> : amis, groupes, messages de groupe, couple</td>
-      <td>Les fonctions sociales du jeu.</td>
-      <td>Exécution du contrat</td>
-    </tr>
-    <tr>
-      <td><strong>Achats</strong> : abonnements et achats effectués</td>
-      <td>Vous donner accès à ce que vous avez payé, sur tous vos appareils.</td>
-      <td>Exécution du contrat</td>
-    </tr>
-    <tr>
-      <td><strong>Notifications</strong> : jeton de notification de l'appareil</td>
-      <td>Vous prévenir quand c'est votre tour. Uniquement si vous acceptez les
-          notifications.</td>
-      <td>Consentement</td>
-    </tr>
-    <tr>
-      <td><strong>Rapports d'erreur</strong> : modèle d'appareil, version de
-          l'app, écran concerné, trace technique, identifiant d'installation</td>
-      <td>Corriger les plantages. L'identifiant d'installation est propre à
-          l'application et ne permet pas de vous suivre ailleurs.</td>
-      <td>Intérêt légitime</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Ce que Darenox ne fait pas</h3>
-<ul>
-  <li>Aucune publicité, et donc aucun traceur publicitaire.</li>
-  <li>Aucune revente ni location de données à des tiers.</li>
-  <li>Aucune collecte de votre position géographique.</li>
-  <li>Aucun accès à vos contacts.</li>
-  <li>
-    Aucun accès à vos photos en dehors de celle que vous choisissez vous-même
-    comme photo de profil.
-  </li>
-</ul>
-
-<h3>Le mode hors ligne</h3>
-<p>
-  Les parties jouées sur un seul téléphone (« en vrai », « la roue ») ne
-  nécessitent pas de compte. Dans ce cas, <strong>rien ne quitte votre
-  appareil</strong> : prénoms, statistiques et cartes personnelles restent
-  stockés localement.
-</p>
-
-<h2>3. Avec qui les données sont partagées</h2>
-<p>
-  Darenox s'appuie sur trois prestataires, et sur aucun autre :
-</p>
-<ul>
-  <li>
-    <strong>Supabase</strong> — hébergement de la base de données, de
-    l'authentification et des photos de profil. Données hébergées dans l'Union
-    européenne.
-  </li>
-  <li>
-    <strong>Expo</strong> — distribution des mises à jour de l'application et
-    acheminement des notifications.
-  </li>
-  <li>
-    <strong>Google Play</strong> — traitement des paiements. Vos coordonnées
-    bancaires sont gérées par Google et ne nous sont jamais transmises.
-  </li>
-</ul>
-<p>
-  Vos données peuvent également être communiquées si la loi nous y oblige.
-</p>
-
-<h2>4. Combien de temps elles sont conservées</h2>
-<ul>
-  <li><strong>Compte et contenu</strong> — jusqu'à la suppression de votre compte.</li>
-  <li>
-    <strong>Compte inactif</strong> — supprimé après 24 mois sans connexion,
-    après un avertissement envoyé par e-mail.
-  </li>
-  <li><strong>Rapports d'erreur</strong> — 12 mois.</li>
-  <li>
-    <strong>Preuves d'achat</strong> — conservées le temps imposé par les
-    obligations comptables, même après suppression du compte, sous une forme
-    dissociée de votre identité.
-  </li>
-</ul>
-
-<h2>5. Vos droits</h2>
-<p>
-  Le RGPD vous donne le droit d'accéder à vos données, de les corriger, de les
-  effacer, d'en obtenir une copie, de vous opposer à leur traitement et de
-  retirer votre consentement à tout moment.
-</p>
-<p>
-  La plupart de ces droits s'exercent directement dans l'application, depuis
-  l'écran <strong>Profil</strong>. Pour le reste, écrivez à
-  <a href="mailto:pro.mushurelie@gmail.com">pro.mushurelie@gmail.com</a> :
-  nous répondons sous 30 jours.
-</p>
-<p>
-  Si notre réponse ne vous satisfait pas, vous pouvez saisir la
-  <a href="https://www.cnil.fr/fr/plaintes" rel="noopener">CNIL</a>.
-</p>
-
-<div class="card">
-  <h3 style="margin-top:0">Supprimer votre compte</h3>
-  <p>
-    Depuis l'application : <strong>Profil → Supprimer mon compte</strong>. La
-    suppression est immédiate et définitive.
-  </p>
-  <p style="margin-bottom:0">
-    Sans accès à l'application, utilisez la
-    <a href="delete-account.html">page de demande de suppression</a>.
-  </p>
-</div>
-
-<h2>6. Sécurité</h2>
-<p>
-  Les échanges avec nos serveurs sont chiffrés en transit. L'accès aux données
-  est cloisonné compte par compte au niveau de la base elle-même : un compte ne
-  peut pas lire les données d'un autre, même en cas de faille de l'application.
-  Aucun système n'étant infaillible, nous vous informerons sans délai en cas de
-  violation susceptible d'engendrer un risque pour vos droits.
-</p>
-
-<h2>7. Mineurs</h2>
-<p>
-  Darenox est <strong>strictement réservé aux personnes majeures</strong>. Nous
-  ne collectons pas sciemment de données concernant des mineurs. Si vous
-  constatez qu'un mineur a créé un compte, écrivez-nous : il sera supprimé sans
-  délai.
-</p>
-
-<h2>8. Modifications</h2>
-<p>
-  Toute modification de cette politique sera publiée sur cette page, avec une
-  date de mise à jour actualisée. Un changement substantiel vous sera signalé
-  dans l'application.
-</p>
-
-<footer>
-  <p>
-    Darenox · <a href="index.html">Pages légales</a> ·
-    <a href="mailto:pro.mushurelie@gmail.com">pro.mushurelie@gmail.com</a>
-  </p>
+<footer class="foot">
+  <div class="foot__inner">
+    <span>© 2026 Darenox</span>
+    <nav>
+      <a href="index.html">Pages légales</a>
+      <a href="delete-account.html">Supprimer son compte</a>
+      <a href="mailto:pro.mushurelie@gmail.com">Nous écrire</a>
+    </nav>
+  </div>
 </footer>
 
-</main>
+<script src="_app.js" defer></script>
 </body>
 </html>

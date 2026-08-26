@@ -13,6 +13,38 @@ privé en plan gratuit. Ces pages vivent donc dans un **second dépôt, public,
 qui ne contient qu'elles** — aucun code source, aucun schéma SQL, aucun
 historique de développement.
 
+## Les fichiers
+
+| Fichier | Rôle |
+| --- | --- |
+| `index.html` | Sommaire des deux documents |
+| `privacy.html` | Politique de confidentialité |
+| `delete-account.html` | Demande de suppression de compte |
+| `_style.css` | Toute la mise en forme |
+| `_app.js` | Thème, sommaire actif, barre de progression |
+
+Les couleurs, la police et les rayons viennent de `src/lib/theme.ts` : ces pages
+sont un prolongement de l'application, pas une annexe administrative. Une
+couleur ajoutée ici sans exister là-bas est une dérive à corriger.
+
+`_app.js` n'est qu'une amélioration progressive. Sans JavaScript, la page reste
+entièrement lisible, le sommaire fonctionne — ce sont des ancres — et le thème
+suit celui du système. Un document légal doit rester consultable quand tout le
+reste échoue.
+
+### Prévisualiser avant de publier
+
+Ouvrir `index.html` directement dans un navigateur suffit. Pour être au plus
+près du rendu final :
+
+```bash
+cd legal && python -m http.server 8080
+```
+
+puis <http://localhost:8080>. Penser à vérifier les deux thèmes (le bouton en
+haut à droite), le rendu sur une largeur de téléphone, et l'aperçu avant
+impression — la feuille de style bascule en noir sur blanc pour le papier.
+
 ## Publier
 
 Une seule fois, depuis la racine du projet :

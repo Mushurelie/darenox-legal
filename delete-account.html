@@ -1,101 +1,222 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Supprimer son compte — Darenox</title>
+<meta name="description" content="Comment supprimer votre compte Darenox et les données associées, depuis l'application ou par e-mail.">
+<meta name="color-scheme" content="dark light">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="_style.css">
+
+<script>
+  try {
+    var t = localStorage.getItem('darenox-legal-theme');
+    document.documentElement.setAttribute(
+      'data-theme',
+      t === 'light' || t === 'dark'
+        ? t
+        : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    );
+  } catch (e) {}
+</script>
 </head>
 <body>
-<main>
 
-<header>
-  <span class="brand">Darenox</span>
-  <h1>Supprimer son compte</h1>
-  <p class="updated">Dernière mise à jour : 26 août 2026</p>
+<a class="skip" href="#doc">Aller au contenu</a>
+<div class="progress" aria-hidden="true"><div class="progress__bar"></div></div>
+
+<header class="head">
+  <div class="head__aurora" aria-hidden="true"></div>
+  <div class="head__inner">
+
+    <div class="bar">
+      <a class="brand" href="index.html">
+        <span class="brand__dot" aria-hidden="true"></span>
+        Darenox
+      </a>
+      <button class="theme-toggle" type="button" hidden>
+        <span data-theme-icon aria-hidden="true">☾</span>
+        <span data-theme-label>Sombre</span>
+      </button>
+    </div>
+
+    <div class="title-block">
+      <span class="eyebrow">Votre compte</span>
+      <h1>Supprimer son compte</h1>
+    </div>
+
+    <p class="lede">
+      Vous pouvez effacer votre compte Darenox et les données qui y sont
+      attachées quand vous le voulez, sans avoir à vous justifier. Voici les
+      deux façons de le faire, et ce que chacune emporte.
+    </p>
+
+    <div class="stamp">
+      <span>Mise à jour&nbsp;: <b>26 août 2026</b></span>
+      <span>Depuis l'app&nbsp;: <b>immédiat</b></span>
+      <span>Par e-mail&nbsp;: <b>sous 30 jours</b></span>
+    </div>
+
+  </div>
 </header>
 
-<p>
-  Vous pouvez supprimer votre compte Darenox et les données associées à tout
-  moment, sans avoir à justifier votre demande.
-</p>
+<div class="wrap">
 
-<div class="card">
-  <h3 style="margin-top:0">Depuis l'application — immédiat</h3>
-  <ol>
-    <li>Ouvrez Darenox et connectez-vous.</li>
-    <li>Allez dans l'onglet <strong>Profil</strong>.</li>
-    <li>Tout en bas, touchez <strong>Supprimer mon compte</strong>.</li>
-    <li>Confirmez, puis écrivez <strong>SUPPRIMER</strong> pour valider.</li>
-  </ol>
-  <p style="margin-bottom:0">
-    La suppression prend effet immédiatement. Elle est définitive : aucune
-    restauration n'est possible.
-  </p>
+  <aside class="rail">
+    <details class="rail__box" open>
+      <summary>Sommaire</summary>
+      <p class="rail__label">Sommaire</p>
+      <ul class="rail__list">
+        <li><a href="#app"><span class="rail__num">01</span> Depuis l'application</a></li>
+        <li><a href="#email"><span class="rail__num">02</span> Par e-mail</a></li>
+        <li><a href="#efface"><span class="rail__num">03</span> Ce qui est effacé</a></li>
+        <li><a href="#conserve"><span class="rail__num">04</span> Ce qui est conservé</a></li>
+        <li><a href="#abonnement"><span class="rail__num">05</span> Abonnement en cours</a></li>
+      </ul>
+    </details>
+  </aside>
+
+  <main class="doc" id="doc">
+
+    <section id="app">
+      <h2><span class="num">01</span>Depuis l'application — immédiat</h2>
+      <p>C'est la voie la plus rapide, et elle ne demande à personne d'intervenir.</p>
+      <ol class="steps">
+        <li>Ouvrez Darenox et connectez-vous.</li>
+        <li>Allez dans l'onglet <strong>Profil</strong>.</li>
+        <li>Tout en bas, touchez <strong>Supprimer mon compte</strong>.</li>
+        <li>Confirmez, puis écrivez <strong>SUPPRIMER</strong> pour valider.</li>
+      </ol>
+      <div class="note note--warn">
+        <p class="note__title">Sans retour possible</p>
+        <p>
+          La suppression prend effet tout de suite. Il n'existe aucune période
+          de grâce et aucune restauration&nbsp;: c'est précisément pourquoi
+          l'application vous demande d'écrire le mot en toutes lettres.
+        </p>
+      </div>
+    </section>
+
+    <section id="email">
+      <h2><span class="num">02</span>Par e-mail — sous 30 jours</h2>
+      <p>
+        Si vous ne pouvez plus ouvrir l'application — téléphone perdu,
+        désinstallée, connexion impossible — écrivez-nous.
+      </p>
+      <p>
+        <a class="mailto" href="mailto:pro.mushurelie@gmail.com?subject=Suppression%20de%20mon%20compte%20Darenox">
+          <span aria-hidden="true">✉</span> Demander la suppression
+        </a>
+      </p>
+      <div class="note">
+        <p class="note__title">Une seule condition</p>
+        <p>
+          Envoyez le message <strong>depuis l'adresse e-mail de votre
+          compte</strong>. C'est ce qui nous permet de vérifier que la demande
+          vient bien de vous — sans cette vérification, n'importe qui pourrait
+          faire supprimer le compte de n'importe qui.
+        </p>
+        <p>
+          La suppression est effectuée sous 30&nbsp;jours et vous recevez une
+          confirmation.
+        </p>
+      </div>
+    </section>
+
+    <section id="efface">
+      <h2><span class="num">03</span>Ce qui est effacé</h2>
+      <div class="note note--do">
+        <p class="note__title">Supprimé définitivement</p>
+        <ul>
+          <li>Votre compte et votre adresse e-mail.</li>
+          <li>Votre profil&nbsp;: prénom affiché, photo, genre, rang et badges.</li>
+          <li>
+            Vos parties en ligne&nbsp;: cartes tirées, réponses écrites,
+            réactions et statistiques.
+          </li>
+          <li>Vos relations&nbsp;: amis, groupes, messages et lien de couple.</li>
+          <li>Vos jetons de notification.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="conserve">
+      <h2><span class="num">04</span>Ce qui est conservé, et pourquoi</h2>
+      <p>
+        Trois exceptions, toutes détachées de votre identité. Les annoncer vaut
+        mieux que de laisser croire à un effacement absolu qui n'existe nulle
+        part.
+      </p>
+      <ul class="facts">
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Preuves d'achat</span>
+            <span class="pill">Obligation comptable</span>
+          </div>
+          <p class="fact__why">
+            Conservées sous une forme dissociée de votre identité, pendant la
+            durée imposée par la loi. Elles ne permettent plus de remonter
+            jusqu'à vous.
+          </p>
+        </li>
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Rapports d'erreur déjà envoyés</span>
+            <span class="pill">12 mois</span>
+          </div>
+          <p class="fact__why">
+            Détachés de votre compte. Ils servent à corriger des plantages qui
+            touchent tout le monde.
+          </p>
+        </li>
+        <li class="fact">
+          <div class="fact__head">
+            <span class="fact__name">Parties partagées</span>
+            <span class="pill">Chez les autres joueurs</span>
+          </div>
+          <p class="fact__why">
+            Vos messages sont supprimés. En revanche, une partie à laquelle
+            d'autres ont participé continue d'exister pour eux — sans plus rien
+            qui vous désigne.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="abonnement">
+      <h2><span class="num">05</span>Si vous avez un abonnement</h2>
+      <div class="note note--warn">
+        <p class="note__title">À résilier séparément</p>
+        <p>
+          Supprimer votre compte <strong>n'annule pas</strong> un abonnement
+          souscrit via Google Play. Il continuerait d'être facturé.
+        </p>
+        <p>
+          Résiliez-le depuis
+          <a href="https://play.google.com/store/account/subscriptions" rel="noopener">Google&nbsp;Play → Abonnements</a>,
+          de préférence <strong>avant</strong> de supprimer votre compte.
+        </p>
+      </div>
+    </section>
+
+  </main>
 </div>
 
-<div class="card">
-  <h3 style="margin-top:0">Sans accès à l'application — sous 30 jours</h3>
-  <p>
-    Si vous ne pouvez plus ouvrir l'application, envoyez un e-mail à
-    <a href="mailto:pro.mushurelie@gmail.com?subject=Suppression%20de%20mon%20compte%20Darenox">pro.mushurelie@gmail.com</a>
-    avec pour objet <strong>« Suppression de mon compte Darenox »</strong>.
-  </p>
-  <p style="margin-bottom:0">
-    Envoyez-le <strong>depuis l'adresse e-mail de votre compte</strong> : c'est
-    ce qui nous permet de vérifier que la demande vient bien de vous. La
-    suppression est effectuée sous 30 jours, et vous recevez une confirmation.
-  </p>
-</div>
-
-<h2>Ce qui est supprimé</h2>
-<ul>
-  <li>Votre compte et votre adresse e-mail.</li>
-  <li>Votre profil : prénom affiché, photo, genre, rang et badges.</li>
-  <li>
-    Vos parties en ligne : cartes tirées, réponses écrites, réactions et
-    statistiques.
-  </li>
-  <li>Vos relations : amis, groupes, messages de groupe et lien de couple.</li>
-  <li>Vos jetons de notification.</li>
-</ul>
-
-<h2>Ce qui est conservé, et pourquoi</h2>
-<ul>
-  <li>
-    <strong>Les preuves d'achat</strong>, sous une forme dissociée de votre
-    identité, pendant la durée imposée par les obligations comptables. Elles ne
-    permettent plus de remonter jusqu'à vous.
-  </li>
-  <li>
-    <strong>Les rapports d'erreur déjà envoyés</strong>, détachés de votre
-    compte, pendant 12 mois au maximum. Ils servent à corriger des plantages qui
-    touchent tout le monde.
-  </li>
-  <li>
-    <strong>Les messages que vous avez envoyés dans un groupe</strong> sont
-    supprimés. En revanche, une partie à laquelle d'autres personnes ont
-    participé continue d'exister pour elles, sans plus rien qui vous désigne.
-  </li>
-</ul>
-
-<div class="card warn">
-  <h3 style="margin-top:0">Abonnement en cours</h3>
-  <p style="margin-bottom:0">
-    Supprimer votre compte <strong>n'annule pas</strong> un abonnement souscrit
-    via Google Play. Résiliez-le séparément depuis
-    <a href="https://play.google.com/store/account/subscriptions" rel="noopener">Google Play → Abonnements</a>,
-    sinon il continuera d'être facturé.
-  </p>
-</div>
-
-<footer>
-  <p>
-    Darenox · <a href="index.html">Pages légales</a> ·
-    <a href="privacy.html">Politique de confidentialité</a>
-  </p>
+<footer class="foot">
+  <div class="foot__inner">
+    <span>© 2026 Darenox</span>
+    <nav>
+      <a href="index.html">Pages légales</a>
+      <a href="privacy.html">Politique de confidentialité</a>
+      <a href="mailto:pro.mushurelie@gmail.com">Nous écrire</a>
+    </nav>
+  </div>
 </footer>
 
-</main>
+<script src="_app.js" defer></script>
 </body>
 </html>

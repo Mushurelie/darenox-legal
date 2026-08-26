@@ -1,43 +1,115 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pages légales — Darenox</title>
+<title>Darenox — Pages légales</title>
+<meta name="description" content="Politique de confidentialité et suppression de compte pour l'application Darenox.">
+<meta name="color-scheme" content="dark light">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="_style.css">
+
+<script>
+  try {
+    var t = localStorage.getItem('darenox-legal-theme');
+    document.documentElement.setAttribute(
+      'data-theme',
+      t === 'light' || t === 'dark'
+        ? t
+        : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    );
+  } catch (e) {}
+</script>
 </head>
 <body>
-<main>
 
-<header>
-  <span class="brand">Darenox</span>
-  <h1>Pages légales</h1>
-  <p class="updated">Le jeu de soirée ultime — Action ou Vérité</p>
+<a class="skip" href="#doc">Aller au contenu</a>
+
+<header class="head">
+  <div class="head__aurora" aria-hidden="true"></div>
+  <div class="head__inner">
+
+    <div class="bar">
+      <span class="brand">
+        <span class="brand__dot" aria-hidden="true"></span>
+        Darenox
+      </span>
+      <button class="theme-toggle" type="button" hidden>
+        <span data-theme-icon aria-hidden="true">☾</span>
+        <span data-theme-label>Sombre</span>
+      </button>
+    </div>
+
+    <div class="title-block">
+      <span class="eyebrow">Action ou Vérité</span>
+      <h1>Pages légales</h1>
+    </div>
+
+    <p class="lede">
+      Deux documents, écrits pour être compris&nbsp;: ce que l'application
+      collecte, et comment tout effacer. Rien d'autre n'est caché ailleurs.
+    </p>
+
+  </div>
 </header>
 
-<div class="card">
-  <h3 style="margin-top:0"><a href="privacy.html">Politique de confidentialité</a></h3>
-  <p style="margin-bottom:0">
-    Quelles données Darenox collecte, pourquoi, avec qui elles sont partagées,
-    combien de temps elles sont conservées, et quels sont vos droits.
-  </p>
+<div class="wrap wrap--solo">
+  <main class="doc" id="doc">
+
+    <ul class="cards">
+      <li>
+        <a class="card" href="privacy.html">
+          <span class="card__title">
+            Politique de confidentialité
+            <span class="card__arrow" aria-hidden="true">→</span>
+          </span>
+          <p>
+            Quelles données sont collectées, pourquoi, à qui elles sont
+            transmises, combien de temps elles sont gardées, et quels droits
+            vous avez dessus.
+          </p>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="delete-account.html">
+          <span class="card__title">
+            Supprimer son compte
+            <span class="card__arrow" aria-hidden="true">→</span>
+          </span>
+          <p>
+            La marche à suivre depuis l'application ou par e-mail, ce qui est
+            effacé, et les trois choses qui ne le sont pas.
+          </p>
+        </a>
+      </li>
+    </ul>
+
+    <div class="note note--do">
+      <p class="note__title">En deux lignes</p>
+      <p>
+        Darenox ne diffuse aucune publicité et ne revend rien à personne. Les
+        parties jouées sur un seul téléphone ne quittent jamais l'appareil. Tout
+        le reste s'efface depuis l'écran <strong>Profil</strong>.
+      </p>
+    </div>
+
+  </main>
 </div>
 
-<div class="card">
-  <h3 style="margin-top:0"><a href="delete-account.html">Supprimer son compte</a></h3>
-  <p style="margin-bottom:0">
-    Comment supprimer votre compte et les données associées, depuis
-    l'application ou par e-mail.
-  </p>
-</div>
-
-<footer>
-  <p>
-    Une question ?
-    <a href="mailto:pro.mushurelie@gmail.com">pro.mushurelie@gmail.com</a>
-  </p>
+<footer class="foot">
+  <div class="foot__inner">
+    <span>© 2026 Darenox</span>
+    <nav>
+      <a href="privacy.html">Confidentialité</a>
+      <a href="delete-account.html">Supprimer son compte</a>
+      <a href="mailto:pro.mushurelie@gmail.com">Nous écrire</a>
+    </nav>
+  </div>
 </footer>
 
-</main>
+<script src="_app.js" defer></script>
 </body>
 </html>

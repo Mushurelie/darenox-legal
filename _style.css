@@ -1,83 +1,954 @@
-/* Charte Darenox, réduite à ce qu'une page légale demande.
-   Aucune ressource externe : ces pages doivent rester lisibles depuis
-   n'importe où, y compris depuis un réseau qui bloque les CDN de polices. */
+/* ═══════════════════════════════════════════════════════════════════════════
+   Darenox — pages légales
+   ═══════════════════════════════════════════════════════════════════════════
+
+   Les valeurs viennent de `src/lib/theme.ts` : ces pages doivent se lire comme
+   un prolongement de l'application, pas comme un document administratif posé à
+   côté. Toute couleur ajoutée ici sans exister là-bas est une dérive.
+
+   Parti pris de composition : un serif pour le texte courant, la police de
+   l'app pour tout le reste. Une politique de confidentialité qui aurait
+   l'allure d'une affiche de soirée inspirerait exactement la méfiance qu'elle
+   est censée dissiper ; le serif installe le registre du document, le sans
+   garde le lien avec la marque.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────  JETONS  ──────────────────────────────────
+   Darenox est une application sombre par nature. Le thème sombre est donc
+   défini sur `:root` — c'est l'état par défaut, pas une variante — et le thème
+   clair vient le remplacer. Un document légal se lit aussi en plein jour,
+   s'imprime et se transmet : lui refuser un thème clair serait un choix de
+   marque payé par le lecteur. */
 
 :root {
+  color-scheme: dark;
+
   --bg: #0a0711;
   --surface: #16111f;
-  --line: rgba(255, 255, 255, 0.09);
+  --sunken: #0e0a16;
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+
   --text: #f4f1f8;
   --soft: #a8a0b8;
   --faint: #6b6379;
-  --accent: #ff4d8d;
-  --lime: #c6ff3d;
+
+  /* `-graphic` sert aux traits et aux fonds, `-ink` au texte : sur fond clair,
+     le lime décoratif devient illisible et doit être assombri. Séparer les deux
+     rôles évite d'avoir à choisir entre une couleur juste et un texte lisible. */
+  --accent-graphic: #ff4d8d;
+  --accent-ink: #ff7fac;
+  --accent-wash: rgba(255, 77, 141, 0.13);
+
+  --lime-graphic: #c6ff3d;
+  --lime-ink: #c6ff3d;
+  --lime-wash: rgba(198, 255, 61, 0.11);
+
+  --shadow: 0 24px 60px -32px rgba(0, 0, 0, 0.9);
+  --aurora: 0.5;
+
+  --measure: 68ch;
+  --radius: 18px;
+  --radius-sm: 11px;
+
+  --sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: Literata, ui-serif, Georgia, "Times New Roman", serif;
 }
 
-* { box-sizing: border-box; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+
+    /* Le blanc est écarté au profit d'un blanc très légèrement violacé : c'est
+       le même biais de teinte que le fond sombre, ce qui fait tenir les deux
+       thèmes comme un seul système plutôt que comme deux palettes voisines. */
+    --bg: #fbf9fd;
+    --surface: #ffffff;
+    --sunken: #f4f1f7;
+
+    --line: rgba(26, 20, 36, 0.11);
+    --line-strong: rgba(26, 20, 36, 0.22);
+
+    --text: #1a1424;
+    --soft: #57506a;
+    --faint: #837c94;
+
+    --accent-graphic: #e01f68;
+    --accent-ink: #c11455;
+    --accent-wash: rgba(224, 31, 104, 0.09);
+
+    --lime-graphic: #8fbf00;
+    --lime-ink: #55730a;
+    --lime-wash: rgba(143, 191, 0, 0.14);
+
+    --shadow: 0 20px 44px -30px rgba(26, 20, 36, 0.4);
+    --aurora: 0.28;
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #fbf9fd;
+  --surface: #ffffff;
+  --sunken: #f4f1f7;
+
+  --line: rgba(26, 20, 36, 0.11);
+  --line-strong: rgba(26, 20, 36, 0.22);
+
+  --text: #1a1424;
+  --soft: #57506a;
+  --faint: #837c94;
+
+  --accent-graphic: #e01f68;
+  --accent-ink: #c11455;
+  --accent-wash: rgba(224, 31, 104, 0.09);
+
+  --lime-graphic: #8fbf00;
+  --lime-ink: #55730a;
+  --lime-wash: rgba(143, 191, 0, 0.14);
+
+  --shadow: 0 20px 44px -30px rgba(26, 20, 36, 0.4);
+  --aurora: 0.28;
+}
+
+/* ────────────────────────────  FONDATIONS  ───────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Sans cette réserve, un lien d'ancre place le titre visé sous la barre de
+     progression, collé au bord — on croit avoir raté la cible. */
+  scroll-padding-top: 88px;
+}
 
 body {
   margin: 0;
-  padding: 0 20px 80px;
+  /* Le fond est peint explicitement : sans ça, la page emprunte celui de son
+     hôte et le texte d'un thème se retrouve sur le fond de l'autre. */
   background: var(--bg);
   color: var(--text);
-  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  -webkit-text-size-adjust: 100%;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.72;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-main { max-width: 720px; margin: 0 auto; }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
-header {
-  padding: 56px 0 32px;
+/* Un contour visible au clavier, jamais à la souris. */
+:focus-visible {
+  outline: 2px solid var(--accent-graphic);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent-wash);
+  color: var(--text);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 12px;
+  z-index: 100;
+  padding: 12px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip:focus {
+  left: 20px;
+}
+
+/* ───────────────────────  BARRE DE PROGRESSION  ──────────────────────────
+   Un document légal se parcourt autant qu'il se lit. Savoir combien il en
+   reste change la façon dont on l'aborde : c'est la seule information que la
+   page ajoute vraiment au texte. C'est aussi le seul endroit où le dégradé de
+   marque apparaît à pleine intensité. */
+
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 2px;
+  z-index: 60;
+  background: transparent;
+  pointer-events: none;
+}
+.progress__bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent-graphic), var(--lime-graphic));
+  transition: width 0.12s linear;
+}
+
+/* ──────────────────────────────  EN-TÊTE  ────────────────────────────────
+   L'unique flourish de la page, et il est confiné ici : deux halos qui dérivent
+   lentement derrière le titre. Au-delà de l'en-tête, plus rien ne bouge — un
+   texte qu'on doit lire attentivement ne supporte pas l'ambiance. */
+
+.head {
+  position: relative;
+  overflow: hidden;
   border-bottom: 1px solid var(--line);
-  margin-bottom: 40px;
+  isolation: isolate;
+}
+
+.head__aurora {
+  position: absolute;
+  inset: -60% -20% auto;
+  height: 420px;
+  z-index: -1;
+  opacity: var(--aurora);
+  pointer-events: none;
+  background:
+    radial-gradient(38% 55% at 22% 42%, var(--accent-graphic) 0%, transparent 68%),
+    radial-gradient(32% 48% at 74% 30%, var(--lime-graphic) 0%, transparent 66%);
+  filter: blur(72px);
+  animation: drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(-4%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(5%, 5%, 0) scale(1.12);
+  }
+}
+
+.head__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 28px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .brand {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-family: var(--sans);
+  font-size: 15px;
   font-weight: 800;
-  font-size: 13px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, var(--accent), var(--lime));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+}
+.brand__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-graphic), var(--lime-graphic));
+  box-shadow: 0 0 14px var(--accent-graphic);
 }
 
-h1 { font-size: clamp(28px, 6vw, 38px); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.02em; }
-h2 { font-size: 21px; margin: 44px 0 12px; letter-spacing: -0.01em; }
-h3 { font-size: 16px; margin: 28px 0 8px; color: var(--soft); }
-
-.updated { color: var(--faint); font-size: 14px; margin: 0; }
-
-p, li { color: var(--soft); }
-strong { color: var(--text); font-weight: 600; }
-a { color: var(--accent); }
-a:hover { color: var(--lime); }
-
-ul { padding-left: 20px; }
-li { margin-bottom: 8px; }
-
-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; display: block; overflow-x: auto; }
-th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { color: var(--text); font-weight: 600; white-space: nowrap; }
-td { color: var(--soft); }
-
-.card {
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 20px 24px;
-  margin: 24px 0;
+  border-radius: 999px;
+  color: var(--soft);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.18s, border-color 0.18s;
 }
-.card.warn { border-color: rgba(255, 77, 141, 0.35); }
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+}
 
-footer {
-  margin-top: 64px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
-  color: var(--faint);
-  font-size: 14px;
+.title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 22ch;
 }
-footer a { color: var(--soft); }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(2.35rem, 6.4vw, 4rem);
+  font-weight: 800;
+  line-height: 0.99;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  color: var(--text);
+}
+
+.lede {
+  max-width: 58ch;
+  margin: 0;
+  font-size: 1.09rem;
+  line-height: 1.68;
+  color: var(--soft);
+}
+
+.stamp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  padding-top: 4px;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--faint);
+}
+.stamp b {
+  color: var(--soft);
+  font-weight: 700;
+}
+
+/* ──────────────────────────────  LAYOUT  ─────────────────────────────── */
+
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px 120px;
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
+}
+
+/* Les pages sans sommaire — l'accueil — ne doivent pas laisser la première
+   colonne vide, ce qui décalerait tout le contenu vers la droite. */
+.wrap--solo {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 780px;
+  gap: 0;
+}
+
+/* ───────────────────────────────  RAIL  ──────────────────────────────── */
+
+.rail {
+  position: sticky;
+  top: 40px;
+  padding-top: 64px;
+  font-family: var(--sans);
+}
+
+/* Sur grand écran le sommaire est toujours déployé : le résumé de l'accordéon
+   n'a rien à y faire, et `_app.js` force l'ouverture pour couvrir le cas d'un
+   téléphone replié puis élargi. */
+.rail__box > summary {
+  display: none;
+}
+
+.rail__label {
+  margin: 0 0 16px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.rail__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  /* Le filet vertical tient lieu de repère de position : le segment actif s'y
+     détache, ce qui situe la lecture sans avoir à relire les intitulés. */
+  border-left: 1px solid var(--line);
+}
+
+.rail__list a {
+  display: flex;
+  gap: 11px;
+  padding: 9px 0 9px 17px;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  color: var(--faint);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.38;
+  text-decoration: none;
+  transition: color 0.18s, border-color 0.18s;
+}
+.rail__list a:hover {
+  color: var(--text);
+}
+.rail__list a[aria-current="true"] {
+  color: var(--text);
+  border-left-color: var(--accent-graphic);
+}
+.rail__num {
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+.rail__list a[aria-current="true"] .rail__num {
+  color: var(--accent-ink);
+}
+
+/* ─────────────────────────────  ARTICLE  ─────────────────────────────── */
+
+.doc {
+  padding-top: 64px;
+  max-width: var(--measure);
+  min-width: 0;
+}
+
+.doc > * + * {
+  margin-top: 1.05em;
+}
+
+section {
+  padding-top: 28px;
+  scroll-margin-top: 88px;
+}
+section + section {
+  margin-top: 56px;
+}
+
+/* Le numéro est posé dans la marge plutôt qu'en préfixe du titre : le titre
+   garde son alignement avec le texte, et la numérotation redevient ce qu'elle
+   est — un repère de citation, pas un ornement. */
+h2 {
+  position: relative;
+  margin: 0 0 18px;
+  font-family: var(--sans);
+  font-size: clamp(1.32rem, 2.6vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+  color: var(--text);
+}
+h2 .num {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 1100px) {
+  h2 .num {
+    position: absolute;
+    left: -58px;
+    top: 0.42em;
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--faint);
+  }
+}
+
+h3 {
+  margin: 2.1em 0 0.55em;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--text);
+}
+
+/* Ancre discrète : indispensable pour renvoyer quelqu'un à un article précis,
+   mais invisible tant qu'on ne survole pas le titre. */
+.anchor {
+  margin-left: 9px;
+  color: var(--faint);
+  font-family: var(--sans);
+  font-weight: 700;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.16s;
+}
+h2:hover .anchor,
+h3:hover .anchor,
+.anchor:focus-visible {
+  opacity: 1;
+}
+
+p {
+  margin: 0;
+  color: var(--soft);
+}
+
+strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+a {
+  color: var(--accent-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.16s;
+}
+a:hover {
+  color: var(--text);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding-left: 1.35em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  color: var(--soft);
+}
+li::marker {
+  color: var(--accent-graphic);
+}
+ol li::marker {
+  color: var(--faint);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ──────────────────────────  FICHES DE DONNÉES  ──────────────────────────
+   Un tableau à trois colonnes devient illisible sur un téléphone, et c'est là
+   que la majorité des gens ouvriront cette page. Chaque donnée collectée est
+   donc une fiche : le libellé, la raison, et la base légale en pastille.
+   L'information tabulaire est conservée, la mise en page ne l'est pas. */
+
+.facts {
+  list-style: none;
+  margin: 1.6em 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.fact {
+  display: grid;
+  gap: 9px;
+  padding: 20px 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.18s;
+}
+.fact:hover {
+  border-color: var(--line-strong);
+}
+
+.fact__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.fact__name {
+  font-family: var(--sans);
+  font-size: 0.97rem;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--text);
+}
+
+.fact__why {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.62;
+  color: var(--soft);
+}
+
+.pill {
+  flex: none;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: var(--sunken);
+  border: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  color: var(--faint);
+  white-space: nowrap;
+}
+.pill--consent {
+  background: var(--accent-wash);
+  border-color: transparent;
+  color: var(--accent-ink);
+}
+
+/* ────────────────────────────  ENCADRÉS  ─────────────────────────────── */
+
+.note {
+  display: grid;
+  gap: 10px;
+  margin: 1.9em 0;
+  padding: 24px 26px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Le filet coloré est porté par un pseudo-élément plutôt que par une bordure :
+   une `border-left` décalerait le contenu de la carte par rapport aux autres. */
+.note--warn,
+.note--do {
+  position: relative;
+  overflow: hidden;
+}
+.note--warn::before,
+.note--do::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+}
+/* Le lavis est composité par-dessus la surface plutôt que de la remplacer :
+   la teinte reste translucide, donc juste dans les deux thèmes, sans avoir à
+   calculer deux couleurs opaques. */
+.note--warn {
+  background: linear-gradient(var(--accent-wash), var(--accent-wash)), var(--surface);
+}
+.note--do {
+  background: linear-gradient(var(--lime-wash), var(--lime-wash)), var(--surface);
+}
+.note--warn::before {
+  background: var(--accent-graphic);
+}
+.note--do::before {
+  background: var(--lime-graphic);
+}
+
+.note__title {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.83rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.note--warn .note__title {
+  color: var(--accent-ink);
+}
+.note--do .note__title {
+  color: var(--lime-ink);
+}
+.note p,
+.note ul,
+.note ol {
+  font-size: 0.97rem;
+}
+
+/* ───────────────────────────  LISTE DE LIENS  ────────────────────────── */
+
+.cards {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.card {
+  display: grid;
+  gap: 8px;
+  padding: 26px 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+.card__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 1.09rem;
+  font-weight: 800;
+  letter-spacing: -0.022em;
+  color: var(--text);
+}
+.card__arrow {
+  color: var(--accent-ink);
+  transition: transform 0.2s;
+}
+.card:hover .card__arrow {
+  transform: translateX(4px);
+}
+.card p {
+  margin: 0;
+  font-size: 0.97rem;
+}
+
+/* ─────────────────────────────  ÉTAPES  ──────────────────────────────── */
+
+.steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 1.4em 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.steps li {
+  position: relative;
+  padding-left: 46px;
+  font-size: 0.98rem;
+  color: var(--soft);
+}
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -1px;
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 999px;
+  background: var(--accent-wash);
+  color: var(--accent-ink);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ──────────────────────  BOUTON DE CONTACT  ──────────────────────────── */
+
+.mailto {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 4px;
+  padding: 13px 22px;
+  background: linear-gradient(135deg, var(--accent-graphic), #ff8a3d);
+  border-radius: 999px;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 26px -12px var(--accent-graphic);
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.mailto:hover {
+  transform: translateY(-1px);
+  color: #fff;
+  box-shadow: 0 15px 32px -12px var(--accent-graphic);
+}
+
+/* ──────────────────────────────  PIED  ───────────────────────────────── */
+
+.foot {
+  border-top: 1px solid var(--line);
+  background: var(--sunken);
+}
+.foot__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 28px 56px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--faint);
+}
+.foot nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+.foot a {
+  color: var(--soft);
+  font-weight: 600;
+  text-decoration: none;
+}
+.foot a:hover {
+  color: var(--text);
+}
+
+/* ─────────────────────────────  ADAPTATIF  ───────────────────────────── */
+
+@media (max-width: 940px) {
+  .wrap {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding-bottom: 80px;
+  }
+  .rail {
+    position: static;
+    padding-top: 44px;
+  }
+  /* Replié en accordéon : sur un écran étroit, un sommaire déployé repousse le
+     texte sous la ligne de flottaison alors qu'il est censé y donner accès. */
+  .rail__box {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 6px 20px;
+  }
+  .rail__box > summary {
+    display: block;
+    cursor: pointer;
+    padding: 14px 0;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    list-style: none;
+  }
+  .rail__box > summary::-webkit-details-marker {
+    display: none;
+  }
+  .rail__box[open] > summary {
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 8px;
+  }
+  .rail__label {
+    display: none;
+  }
+  .rail__list {
+    padding-bottom: 12px;
+  }
+  .doc {
+    padding-top: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 16px;
+  }
+  .head__inner,
+  .wrap,
+  .foot__inner {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .fact,
+  .note,
+  .card {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .foot__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ─────────────────────────────  IMPRESSION  ──────────────────────────────
+   Une politique de confidentialité finit régulièrement sur papier — dossier,
+   archive, transmission à un tiers. Imprimer la version sombre gâcherait une
+   cartouche pour un résultat illisible. */
+
+@media print {
+  :root {
+    --bg: #fff;
+    --surface: #fff;
+    --sunken: #fff;
+    --text: #000;
+    --soft: #222;
+    --faint: #555;
+    --line: #ccc;
+    --line-strong: #999;
+    --shadow: none;
+  }
+  .progress,
+  .rail,
+  .theme-toggle,
+  .skip,
+  .head__aurora,
+  .anchor,
+  .mailto {
+    display: none !important;
+  }
+  .wrap {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+  .doc {
+    max-width: none;
+  }
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  section {
+    break-inside: avoid;
+  }
+  h2 {
+    break-after: avoid;
+  }
+  .fact,
+  .note,
+  .card {
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+  /* Une URL cliquable ne sert à rien sur papier : on l'imprime en clair. */
+  .doc a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+    word-break: break-all;
+  }
+}
