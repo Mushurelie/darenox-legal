@@ -377,7 +377,7 @@ h1 {
 }
 
 /* Sur grand écran le sommaire est toujours déployé : le résumé de l'accordéon
-   n'a rien à y faire, et `_app.js` force l'ouverture pour couvrir le cas d'un
+   n'a rien à y faire, et `app.js` force l'ouverture pour couvrir le cas d'un
    téléphone replié puis élargi. */
 .rail__box > summary {
   display: none;
